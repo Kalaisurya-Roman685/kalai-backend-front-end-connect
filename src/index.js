@@ -14,12 +14,15 @@ import store from './redux/store/Store';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { BrowserRouter } from 'react-router-dom';
+
 ReactDOM.render(
-    <Provider store={store}>
-        <ToastContainer></ToastContainer>
-        <App />
-    </Provider>
-    ,
+    <BrowserRouter>
+        <Provider store={store}>
+            <ToastContainer></ToastContainer>
+            <App />
+        </Provider>
+    </BrowserRouter>,
 
     document.getElementById("root")
 );

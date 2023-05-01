@@ -29,19 +29,13 @@ function Login() {
     }
 
     const Submituser = (e) => {
-        // e.preventDefault();
+
 
         const data = {
             email: email,
             password: password
         }
-        // LoginUser(data).then((res) => {
-        //     toast.success("kalai")
-        // }).catch((err) => {
-        //     console.log(err);
-        //     toast.error(err?.response?.data)
 
-        // })
         dispatch(LoginActionData(data, history, toast));
 
     }
@@ -69,7 +63,11 @@ function Login() {
                         </div>
                     </div>
 
-                    <button class="btn btn-primary" onClick={handleSubmit(Submituser)}>Submit</button>
+                    <div className='d-flex gap-4'>
+                        <button class="btn btn-primary" onClick={handleSubmit(Submituser)}>Login</button>
+                        <button class="btn btn-warning" onClick={() => history.push("/signup")}>Signup</button>
+                    </div>
+
                 </form>
             </div>
         </div>

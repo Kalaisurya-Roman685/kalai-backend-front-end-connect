@@ -1,5 +1,5 @@
 
-import { LoginUser } from '../../../services/loginservice/login-service';
+import { LoginSignup, LoginUser, RemoveUserDb } from '../../../services/loginservice/login-service';
 import { LOGIN_USER_ERROR, LOGIN_USER_LOADING, LOGIN_USER_SUCCESS } from './../../types';
 
 
@@ -9,8 +9,7 @@ export const LoginActionData = (data, history, toast) => async (dispatch) => {
     try {
 
         const loginresponse = await LoginUser(data);
-
-        console.log(loginresponse,"loginresponse")
+        localStorage.setItem("userId", JSON.stringify(loginresponse?.data?.id));
         dispatch({
             type: LOGIN_USER_SUCCESS,
             payload: loginresponse
@@ -23,6 +22,8 @@ export const LoginActionData = (data, history, toast) => async (dispatch) => {
 
     }
     catch (err) {
+
+        toast.error(err?.response?.data?.message);
         dispatch({
             type: LOGIN_USER_ERROR,
             error: true
@@ -31,3 +32,39 @@ export const LoginActionData = (data, history, toast) => async (dispatch) => {
 }
 
 
+
+
+export const UserSignup = (data, history, toast) => async (dispatch) => {
+
+    try {
+
+        await LoginSignup(data);
+
+        toast.success("Signup User Successfully!!");
+        setTimeout(() => {
+            history.push("/")
+        }, 1300);
+
+    }
+    catch (err) {
+        toast.error(err?.response?.data?.message)
+    }
+}
+
+
+
+export const UserRemoveDb = (data, history, toast) => async (dispatch) => {
+
+    try {
+
+        await RemoveUserDb(data);
+        toast.success("User Remove Successfully ");
+        setTimeout(() => {
+            history.push("/")
+        }, 1300);
+
+    }
+    catch (err) {
+        toast.error(err?.response?.data?.message)
+    }
+}
